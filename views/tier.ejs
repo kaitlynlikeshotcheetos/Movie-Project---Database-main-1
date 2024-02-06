@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Tier List</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<style>
+    #main-content {
+    display: flex;
+    flex-grow: 1;
+}
+
+#tier-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.tier-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    width:80vw;
+}
+
+.tier {
+    border: 2px solid black;
+    padding: 10px;
+    margin-right: 20px;
+    text-align: center;
+    min-height: 100px;
+    overflow-y: auto;
+    margin-left:20px;
+    flex-grow: 1;
+}
+
+#saved-movies {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 100%;
+    overflow-y: auto;
+    background-color: lightgray;
+    padding: 20px;
+}
+
+.movie-poster {
+    width: 100px;
+    height: auto;
+    margin: 5px;
+    cursor: pointer;
+}
+    
+    #s-tier{
+        background-color: #FF7F7F;
+    }
+    #a-tier{
+        background-color: #FFBF7E;
+    }
+    #b-tier{
+        background-color: #FFDF7F;
+    }
+    #c-tier{
+        background-color: #FFFF7F;
+    }
+    #d-tier{
+        background-color: #BFFF7F;
+    }
+    
+</style>
+<body>
+    <h1>Your Movie Tier List</h1>
+    <div id="main-content">
+        <!-- tier levels -->
+        <div id="tier-list">
+            <div class="tier-row">
+    <h2>S Tier</h2>
+    <div class="tier s-tier" id="s-tier">
+        <% sMovies.forEach(movie => { %>
+            <img src="<%= movie.poster %>" alt="<%= movie.title %>" class="movie-poster" draggable="true" data-movie-id="<%= movie._id %>">
+        <% }); %>
+    </div>
+</div>
+<!-- A -->
+<div class="tier-row">
+    <h2>A Tier</h2>
+    <div class="tier a-tier" id="a-tier">
+        <% aMovies.forEach(movie => { %>
+            <img src="<%= movie.poster %>" alt="<%= movie.title %>" class="movie-poster" draggable="true" data-movie-id="<%= movie._id %>">
+        <% }); %>
+    </div>
+</div>
+<!-- B  -->
+<div class="tier-row">
+    <h2>B Tier</h2>
+    <div class="tier b-tier" id="b-tier">
+        <% bMovies.forEach(movie => { %>
+            <img src="<%= movie.poster %>" alt="<%= movie.title %>" class="movie-poster" draggable="true" data-movie-id="<%= movie._id %>">
+        <% }); %>
+    </div>
+</div>
+<!-- C  -->
+<div class="tier-row">
+    <h2>C Tier</h2>
+    <div class="tier c-tier" id="c-tier">
+        <% cMovies.forEach(movie => { %>
+            <img src="<%= movie.poster %>" alt="<%= movie.title %>" class="movie-poster" draggable="true" data-movie-id="<%= movie._id %>">
+        <% }); %>
+    </div>
+</div>
+<!-- D -->
+<div class="tier-row">
+    <h2>D Tier</h2>
+    <div class="tier d-tier" id="d-tier">
+        <% dMovies.forEach(movie => { %>
+            <img src="<%= movie.poster %>" alt="<%= movie.title %>" class="movie-poster" draggable="true" data-movie-id="<%= movie._id %>">
+        <% }); %>
+    </div>
+</div>
+        </div>
+    </div>
+
+    
+    <div id="saved-movies">
+        <h2>Saved Movie Posters</h2>
+        <% savedMovies.forEach(movie => { %>
+            <img src="<%= movie.poster %>" alt="<%= movie.title %>" class="movie-poster" draggable="true">
+        <% }); %>
+    </div>
+
+    
+    <!--<button onclick="saveTierMovies()" id="save-tier-button">Save Tier List</button>-->
+    <button onclick="location.href='/'">Go Back to Index</button>
+    
+    <script>
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const moviePosters = document.querySelectorAll('.movie-poster');
+            const tierBoxes = document.querySelectorAll('.tier');
+
+            moviePosters.forEach(poster => {
+                poster.addEventListener('dragstart', () => {
+                    poster.classList.add('dragging');
+                });
+
+                poster.addEventListener('dragend', () => {
+                    poster.classList.remove('dragging');
+                });
+            });
+
+            tierBoxes.forEach(box => {
+                box.addEventListener('dragover', e => {
+                    e.preventDefault();
+                    const draggingPoster = document.querySelector('.dragging');
+                    if (draggingPoster) {
+                        box.appendChild(draggingPoster);
+                    }
+                });
+            });
+        });
+        
+        
+        
+    </script>
+    
+</body>
+</html>

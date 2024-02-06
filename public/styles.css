@@ -1,0 +1,70 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.container {
+  padding: 20px;
+  text-align: center;
+}
+
+.sort-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.movie-card {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: calc(33.33% - 40px);
+  max-width: 300px;
+  text-align: center;
+}
+
+.movie-card img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.movie-card h3 {
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
+
+.movie-card p {
+  margin: 5px 0;
+}
+
+.movie-card .watch-button,
+.movie-card .delete-button {
+  display: inline-block;
+  padding: 5px 10px;
+  margin-top: 10px;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.watch-button {
+  background-color: #7ca386;
+}
+
+.delete-button {
+  background-color: #f25757;
+}
+
+.save-button {
+  background-color: #93bcdb;
+}
+
+

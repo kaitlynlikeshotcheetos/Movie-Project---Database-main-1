@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Save Movie</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Additional CSS styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .movie-details {
+      padding: 20px;
+      max-width: 50%;
+    }
+
+    .movie-poster {
+      max-width: 50%;
+    }
+
+    .movie-info {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+
+    .save-search {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+      margin-left: 20px;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* New styles for search bar */
+    .search-bar {
+      text-align: center;
+      margin-top: 20px;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .go-to-movies-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <button class="go-to-movies-button btn btn-primary" type="button" onclick="window.location.href = '/';">Go to My Movies</button>
+  <div class="search-bar">
+    <form action="/search" method="POST" class="form-inline">
+  <input type="text" name="movieTitle" class="form-control mr-sm-2" style="font-size: 18px;" placeholder="Find more movies!..." required>
+  <button type="submit" class="btn btn-primary">Search</button>
+</form>
+  </div>
+
+  <div class="container">
+    <div class="movie-poster">
+      <img src="<%= movie.Poster %>" alt="Sorry, that is not a movie in our database.">
+    </div>
+    <div class="movie-details">
+      <div class="movie-info">
+        <h2><%= movie.Title %></h2>
+        <p><strong>Date:</strong> <%= movie.Year %></p>
+        <p><strong>Description:</strong> <%= movie.Plot %></p>
+      </div>
+      <div class="save-search">
+        <form action="/save" method="POST">
+          <input type="hidden" name="title" value="<%= movie.Title %>" />
+          <input type="hidden" name="poster" value="<%= movie.Poster %>" />
+          <input type="hidden" name="director" value="<%= movie.Director %>" />
+          <input type="hidden" name="year" value="<%= movie.Year %>" />
+          <input type="hidden" name="boxOffice" value="<%= movie.BoxOffice %>" />
+          <button type="submit">Save</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

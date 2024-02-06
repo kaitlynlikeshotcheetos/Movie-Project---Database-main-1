@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Movie Database</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+    <style>
+        body {
+            background-color:#c3d9d2;
+        }
+    </style>
+<body>
+  <div class="container">
+    <form action="/search" method="POST" class="form-inline mb-3">
+      <button type="submit" class="btn btn-primary">Find a New Movie</button>
+    </form>
+    <a href="/rank">Go to Tier List</a>
+    <form action="/sort" method="POST" class="sort-button">
+  <button type="submit" class="btn btn-primary btn-lg">
+    <% if (sortCriteria && sortCriteria.title === 1) { %>
+      Sort by Times Watched
+    <% } else { %>
+      Sort Alphabetically
+    <% } %>
+  </button>
+</form>
+
+
+    <% if (messages.success) { %>
+      <div class="alert alert-success">
+        <%= messages.success %>
+      </div>
+    <% } else if (messages.error) { %>
+      <div class="alert alert-danger">
+        <%= messages.error %>
+      </div>
+    <% } %>
+
+    <h2>My Saved Movies</h2>
+    <h3>You've watched <%= totalMovies %> movies a total of <%= totalTimesWatched %> times!</h3> 
+    <div class="movie-list">
+      <% savedMovies.forEach(movie => { %>
+        <div class="movie-card">
+          <img src="<%= movie.poster %>" alt="<%= movie.title %>">
+          <h3><%= movie.title %></h3>
+          <p>Watched: <%= movie.timesWatched %> times</p>
+          <a class="watch-button btn btn-success" href="watch/<%= movie._id %>">Watch</a>
+          <a class="delete-button btn btn-danger" href="delete/<%= movie._id %>">Delete</a>
+        </div>
+      <% }); %>
+    </div>
+  </div>  
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
